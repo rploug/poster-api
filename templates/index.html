@@ -1,0 +1,321 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Poster Builder</title>
+    <style>
+      :root {
+        --accent: #0059b2;
+        --accent-light: #e6f0ff;
+      }
+
+      /* ---------- base ---------- */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fa;
+        padding: 3rem 1rem;
+        color: #333;
+      }
+      h1 {
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      /* ---------- card ---------- */
+      form {
+        max-width: 640px;
+        margin: auto;
+        background: #fff;
+        padding: 2rem 2.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      }
+
+      /* ---------- standard fields ---------- */
+      label {
+        display: block;
+        margin-top: 1.4rem;
+        font-weight: 600;
+      }
+      input[type="text"],
+      input[type="file"],
+      textarea,
+      select {
+        display: block;
+        width: 100%;
+        margin-top: 0.4rem;
+        padding: 0.55rem 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        background: #fafafa;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+      select,
+      input[type="file"] {
+        background: #fff;
+      }
+
+      /* ---------- counters ---------- */
+      .count {
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+        color: #666;
+        float: right;
+      }
+      .over {
+        color: #d00;
+      }
+
+      /* ---------- authors widget ---------- */
+      .author-wrap {
+        display: flex;
+        margin-top: 0.4rem;
+      }
+      .author-wrap input {
+        flex: 1;
+        border: 1px solid #ccc;
+        border-radius: 6px 0 0 6px;
+        background: #fff;
+        padding: 0.55rem 0.8rem;
+        font-size: 1rem;
+      }
+      #addAuthor {
+        width: 48px;
+        border: none;
+        border-radius: 0 6px 6px 0;
+        background: var(--accent);
+        color: #fff;
+        font-size: 1.7rem;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      #addAuthor:hover {
+        background: #004a93;
+      }
+
+      .author-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #eef1f8;
+        padding: 0.55rem 0.9rem;
+        margin-top: 0.5rem;
+        border-radius: 6px;
+        font-weight: 600;
+      }
+      .author-item button {
+        background: #ff4b4b;
+        border: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        font-size: 1rem;
+        line-height: 0;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .author-item button:hover {
+        background: #e33a3a;
+      }
+
+      /* ---------- checkboxes inline ---------- */
+      .checkbox {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        font-weight: 600;
+      }
+
+      /* ---------- submit ---------- */
+      button[type="submit"] {
+        margin-top: 2rem;
+        width: 100%;
+        padding: 0.8rem;
+        background: var(--accent);
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button[type="submit"]:hover {
+        background: #004a93;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Create SDU Project Poster</h1>
+    <form method="POST" action="https://poster-api-40yi.onrender.com/" enctype="multipart/form-data">
+      <label
+        >Project name
+        <input type="text" name="project_name" maxlength="40" required placeholder="e.g. Roomba Rampage" />
+        <span id="titleCount" class="count">0/40</span>
+      </label>
+
+      <label
+        >Description
+        <textarea name="description" rows="4" maxlength="290" required placeholder="Short project summary…"></textarea>
+        <span id="descCount" class="count">0/290</span>
+      </label>
+
+      <label
+        >Semester
+        <select name="semester" required>
+          <option value="">-- choose --</option>
+          <option>1. Semester</option>
+          <option>2. Semester</option>
+          <option>3. Semester</option>
+          <option>4. Semester</option>
+          <option>5. Semester</option>
+          <option>6. Semester</option>
+          <option>7. Semester</option>
+          <option>8. Semester</option>
+          <option>9. Semester</option>
+          <option>10. Semester</option>
+        </select>
+      </label>
+
+      <label
+        >Course
+        <select name="course">
+          <option value="">-- choose --</option>
+          <option>3D programmering 3</option>
+          <option>Advanced Artificial Intelligence for Games</option>
+          <option>Bachelorprojekt</option>
+          <option>Creating dynamic 3D objects</option>
+          <option>Experts in Team Innovation</option>
+          <option>Hardware og robotteknologi 2</option>
+          <option>Hardware og robotteknologi 3</option>
+          <option>Human-Robot Interaction</option>
+          <option>Ingeniørfagets videnskabsteori</option>
+          <option>Introduction to Soft Robotics</option>
+          <option>Kandidatspeciale</option>
+          <option>Læringsteknologi 1</option>
+          <option>Læringsteknologi 2</option>
+          <option>Learning and Technology</option>
+          <option>Programmering af robotter og andre fysiske enheder</option>
+          <option>Projektledelse og forundersøgelse</option>
+          <option>Real-time web-applikationer</option>
+          <option>Scientific Methods</option>
+          <option>Simulationer og computerspil</option>
+          <option>Social Technology Lab 1</option>
+          <option>Social Technology Lab 2</option>
+          <option>Social Technology Lab 3</option>
+          <option>Sociale medier og læring</option>
+          <option>Softwarearkitektur</option>
+          <option>Spilprogrammering 1</option>
+          <option>Spilprogrammering 2</option>
+          <option>Spilprogrammering 3</option>
+          <option>Spildesign 1</option>
+          <option>Spildesign 2</option>
+          <option>Statistik</option>
+          <option>Technology Entrepreneurship</option>
+          <option>Virtual og Augmented Reality 1</option>
+          <option>Virtual og Augmented Reality 2</option>
+          <option>Web programmering 1</option>
+          <option>Web programmering 2</option>
+          <option>Web programmering 3</option>
+          <option>Web programmering 4</option>
+          <option>Æstetik, kreativitet og adfærdspsykologi</option>
+        </select>
+      </label>
+
+      <label
+        >Custom course (optional)
+        <input type="text" name="course_custom" placeholder="Write your own course" />
+      </label>
+
+      <label
+        >Authors
+        <div class="author-wrap">
+          <input type="text" id="authorInput" placeholder="Add author…" />
+          <button type="button" id="addAuthor">+</button>
+        </div>
+        <div id="authorList"></div>
+        <input type="hidden" name="authors" id="authorsHidden" required />
+      </label>
+
+      <script>
+        const input = document.getElementById("authorInput");
+        const list = document.getElementById("authorList");
+        const hidden = document.getElementById("authorsHidden");
+        const addBtn = document.getElementById("addAuthor");
+
+        function refreshHidden() {
+          hidden.value = [...list.querySelectorAll(".author-item span")].map((s) => s.textContent).join(", ");
+        }
+        function addAuthor() {
+          const name = input.value.trim();
+          if (!name) return;
+          const div = document.createElement("div");
+          div.className = "author-item";
+          div.innerHTML = `<span>${name}</span><button type="button">🗑</button>`;
+          div.querySelector("button").onclick = () => {
+            div.remove();
+            refreshHidden();
+          };
+          list.appendChild(div);
+          input.value = "";
+          refreshHidden();
+        }
+        addBtn.onclick = addAuthor;
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            addAuthor();
+          }
+        });
+      </script>
+
+      <label
+        >Images (multiple)
+        <input type="file" name="images" multiple required />
+      </label>
+
+      <div class="checkbox">
+        <input type="checkbox" name="dark" id="dark" />
+        <label for="dark" style="margin: 0; font-weight: 400">Dark theme (white on black)</label>
+      </div>
+
+      <button type="submit">Generate</button>
+    </form>
+
+    <script>
+      const titleInput = document.querySelector('[name="project_name"]');
+      const descInput = document.querySelector('[name="description"]');
+      const titleCount = document.getElementById("titleCount");
+      const descCount = document.getElementById("descCount");
+      const update = (el, c, max) => {
+        const n = el.value.length;
+        const t = `${n}/${max}`;
+        el.nextElementSibling.textContent = t;
+        el.nextElementSibling.classList.toggle("over", n > max);
+      };
+      titleInput.addEventListener("input", () => update(titleInput, titleCount, 40));
+      descInput.addEventListener("input", () => update(descInput, descCount, 290));
+      update(titleInput, titleCount, 40);
+      update(descInput, descCount, 290);
+    </script>
+  </body>
+</html>
